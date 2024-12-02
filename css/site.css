@@ -7,15 +7,16 @@ nav {
 	background-color: #e0c1c1;
 }
 
+img {
+	object-fit: fill;
+}
+
 .pokedex {
-	/* display: flex; */
-	/* flex-direction: row; */
-	/* flex-wrap: wrap; */
 	position: absolute;
 }
 
 .pokeCard {
-	background-color: red;
+	background-color: snow;
 	position: relative;
 	height: 500px;
 	width: 350px;
@@ -28,7 +29,7 @@ nav {
 	position: absolute;
 	height: 75px;
 	width: 100%;
-	background-color: aqua;
+	/* background-color: aqua; */
 	z-index: 5;
 	border-radius: 15px 15px 0px 0px;
 }
@@ -47,6 +48,12 @@ nav {
 	left: 10px;
 	top: 45px;
 	background-color: cadetblue;
+}
+
+.pokeEvoImg img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
 }
 
 .pokeCardTitle {
@@ -69,16 +76,19 @@ nav {
 	border-radius: 50%;
 	left: 320px;
 	top: 25px;
-	background-color: cadetblue;
+	/* background-color: cadetblue; */
+}
+
+.pokeCardTypeImg img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
 }
 
 .pokeCardMain {
 	position: absolute;
-	background-color: chartreuse;
 	height: 175px;
-	/* width: 330px; */
 	width: 100%;
-	/* left: 10px; */
 	top: 75px;
 	z-index: 4;
 }
@@ -91,9 +101,15 @@ nav {
 	left: 10px;
 }
 
+.pokeCardImg img {
+	width: 100%;
+	height: 100%;
+	object-fit: fill;
+}
+
 .pokeCardInfoBar {
 	position: absolute;
-	background-color: bisque;
+	background-color: gold;
 	height: 20px;
 	width: 100%;
 	top: 155px;
@@ -107,7 +123,7 @@ nav {
 	/* flex-direction: column; */
 	/* justify-content: space-around; */
 	align-content: center;
-	background-color: aquamarine;
+	/* background-color: aquamarine; */
 	width: 100%;
 	height: 175px;
 	top: 250px;
@@ -116,30 +132,25 @@ nav {
 .pokeCardAttack {
 	display: flex;
 	justify-content: space-between;
-	/* text-align: center; */
-	/* flex-direction: row; */
-	/* width: 100%; */
 	padding-top: 5px;
 	padding-bottom: 5px;
-	padding-left: 75px;
+	padding-left: 50px;
 	padding-right: 25px;
-	/* height: 55px; */
-	background-color: rgb(140, 177, 29);
+	/* background-color: rgb(140, 177, 29); */
 }
 
 .pokeCardAttackName {
-	background-color: rgb(36, 95, 145);
-	/* flex-direction: row; */
+	/* background-color: rgb(36, 95, 145); */
 }
 
 .pokeCardAttackDmg {
-	background-color: rgb(111, 111, 184);
+	/* background-color: rgb(111, 111, 184); */
 }
 
 .pokeCardFooter {
 	display: flex;
 	position: absolute;
-	background-color: blueviolet;
+	/* background-color: blueviolet; */
 	height: 50px;
 	width: 100%;
 	top: 425px;
@@ -147,12 +158,16 @@ nav {
 
 .pokeCardWeakRes {
 	width: 40%;
-	background-color: cadetblue;
+	/* background-color: cadetblue; */
+	background-color: gray;
+	padding-left: 8px;
 }
 
 .pokeCardDesc {
 	width: 60%;
-	background-color: rgb(21, 113, 117);
+	/* background-color: rgb(21, 113, 117); */
+	background-color: darkgray;
 	font-size: smaller;
 	line-height: 12px;
+	padding-left: 5px;
 }
