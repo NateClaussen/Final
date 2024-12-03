@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Document</title>
+		<title>Create New Pokemon Card</title>
 
 		<link
 			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -12,6 +12,8 @@
 			crossorigin="anonymous"
 		/>
 		<link rel="stylesheet" href="css/site.css" />
+		<script src="js/Pokemon.js" defer></script>
+		<script src="js/creator.js" defer></script>
 	</head>
 	<body>
 		<header>
@@ -20,11 +22,180 @@
 					>Home</a
 				>
 				<a class="nav-link" href="pokedex.html">Pokedex</a>
+				<a class="nav-link" href="creator.html">Create</a>
 				<a class="nav-link disabled" href="battle.html">Battle</a>
 			</nav>
 		</header>
 		<main>
-			<div class="container"></div>
+			<div class="container">
+				<div class="row">
+					<div class="col-lg formDiv">
+						<form id="pokeForm">
+							<div class="form-group">
+								<label for="pokeName">Name:</label>
+								<input
+									type="text"
+									class="form-control"
+									id="pokeName"
+									placeholder="Pokemon Name"
+									required
+								/>
+							</div>
+							<div class="form-group">
+								<label for="pokeStage">Pokemon Stage:</label>
+								<select class="form-control" id="pokeStage">
+									<option value="basic">Basic</option>
+									<option value="stage 1">Stage 1</option>
+									<option value="stage 2">Stage 2</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="pokeStageImgFile"
+									>Pokemon Evolution Image</label
+								>
+								<input
+									type="file"
+									class="form-control-file"
+									id="pokeStageImgFile"
+								/>
+							</div>
+							<div class="form-group">
+								<label for="pokeMainImgFile"
+									>Pokemon Main Image</label
+								>
+								<input
+									type="file"
+									class="form-control-file"
+									id="pokeMainImgFile"
+								/>
+							</div>
+							<div class="form-group">
+								<label for="pokeType">Pokemon Type:</label>
+								<select
+									class="form-control"
+									id="pokeType"
+									name="pokeType"
+								>
+									<option value="bug">Bug</option>
+									<option value="dark">Dark</option>
+									<option value="dragon">Dragon</option>
+									<option value="electric">Electric</option>
+									<option value="fairy">Fairy</option>
+									<option value="fighting">Fighting</option>
+									<option value="fire">Fire</option>
+									<option value="flying">Flying</option>
+									<option value="ghost">Ghost</option>
+									<option value="grass">Grass</option>
+									<option value="ground">Ground</option>
+									<option value="ice">Ice</option>
+									<option value="normal">Normal</option>
+									<option value="poison">Poison</option>
+									<option value="psychic">Psychic</option>
+									<option value="rock">Rock</option>
+									<option value="steel">Steel</option>
+									<option value="water">Water</option>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="hpNum">HP:</label>
+								<input
+									type="number"
+									class="form-control"
+									id="hpNum"
+									placeholder="Pokemon Health"
+									required
+								/>
+							</div>
+							<div class="form-group">
+								<label for="PokeStatString">Stats String</label>
+								<input
+									type="text"
+									id="PokeStatString"
+									class="form-control"
+									placeholder="Text Under Main Image"
+								/>
+							</div>
+
+							<div
+								id="attackFormDiv"
+								class="form-group border border-secondary mt-2"
+							>
+								<label for="AttackName">Attack Name:</label>
+								<input
+									class="form-control"
+									type="text"
+									id="AttackName"
+									placeholder="Attack Name"
+								/>
+								<label for="AttackDmg">Attack Damage:</label>
+								<input
+									class="form-control"
+									type="text"
+									id="AttackDmg"
+									placeholder="Attack Damage"
+								/>
+								<button
+									id="AddBtn"
+									class="btn btn-success"
+									placeholder="Add Attack"
+								>
+									Add Attack
+								</button>
+								<select
+									multiple
+									class="form-control"
+									id="PokeAttackList"
+								></select>
+								<button
+									id="RemoveBtn"
+									class="btn btn-danger"
+									placeholder="Remove Attack"
+								>
+									Remove Attack
+								</button>
+							</div>
+
+							<div class="form-group">
+								<label for="pokeWeakness">Weakness</label>
+								<input
+									type="text"
+									id="pokeWeakness"
+									class="form-control"
+									placeholder="Pokemon Weakness"
+								/>
+							</div>
+							<div class="form-group">
+								<label for="pokeRes">Resistance</label>
+								<input
+									type="text"
+									id="pokeRes"
+									class="form-control"
+									placeholder="Pokemon Resistance"
+								/>
+							</div>
+							<div class="form-group">
+								<label for="pokeFullDesc"
+									>Full Description</label
+								>
+								<textarea
+									class="form-control"
+									id="pokeFullDesc"
+									rows="3"
+									placeholder="Full Description"
+								></textarea>
+							</div>
+							<button
+								id="submitBtn"
+								type="submit"
+								class="btn btn-success"
+							>
+								Generate Pokemon
+							</button>
+						</form>
+					</div>
+					<div class="col-lg" id="OutputDiv"></div>
+				</div>
+			</div>
 		</main>
 		<footer></footer>
 
