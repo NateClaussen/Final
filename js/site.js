@@ -14,9 +14,9 @@ function createNewElementTxt(name, attr, value, text) {
 }
 
 class Pokemon {
-	constructor(Name, attributes) {
+	constructor(attributes) {
 		Pokemon.#count++;
-		this.Name = Name ?? "";
+		this.Name = attributes.Name ?? "";
 		this.Stage = attributes.Stage ?? "Basic";
 		this.EvoImg = attributes.StageImg ?? null; //in the "" I can put a default image path...
 		this.TypeImg = attributes.TypeImg ?? "";
@@ -209,7 +209,8 @@ class Pokemon {
 }
 
 function addPikachu() {
-	let pikachu = new Pokemon("Pikachu", {
+	let pikachu = new Pokemon({
+		Name: "Pikachu",
 		TypeImg: "images/types/ElectricTypeLogo.png",
 		MainImg: "images/pikacuMain.png",
 		Hp: 60,
@@ -231,10 +232,16 @@ function addPikachu() {
 		Type: "electric",
 	});
 	Pokedex.appendChild(pikachu.getCard());
+	// let JSONTest = JSON.stringify(pikachu);
+	// console.log(JSONTest);
+	// let pikachu2 = new Pokemon(JSON.parse(JSONTest));
+	// //console.log(pikachu2);
+	// Pokedex.appendChild(pikachu2.getCard());
 }
 
 function addPignite() {
-	let pikachu = new Pokemon("Pignite", {
+	let pikachu = new Pokemon({
+		Name: "Pignite",
 		Stage: "Stage 1",
 		StageImg: "images/Tepig.png",
 		TypeImg: "images/types/FireTypeLogo.png",
@@ -258,6 +265,7 @@ function addPignite() {
 		Type: "fire",
 	});
 	Pokedex.appendChild(pikachu.getCard());
+	// console.log(JSON.stringify(pikachu));
 }
 
 addPikachu();
