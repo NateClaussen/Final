@@ -6,7 +6,7 @@ function addAttack() {
 	if (attackName != "" && attackDmg != "") {
 		let attack = { Name: attackName, Damage: attackDmg };
 		const option = document.createElement("option");
-		option.value = attack;
+		option.value = JSON.stringify(attack);
 		option.textContent = `${attackName}: ${attackDmg}`;
 		pokeAttackList.appendChild(option);
 	}
@@ -50,6 +50,11 @@ function updateCard() {
 		pokemonStageImg = "images/Tepig.png";
 	}
 
+	const pokeAttacks = [];
+	for (const option of pokeAttackList.options) {
+		pokeAttacks.push(JSON.parse(option.value));
+	}
+
 	let newPokemon = new Pokemon({
 		Name: pokemonName,
 		Stage: pokemonStage,
@@ -58,7 +63,7 @@ function updateCard() {
 		MainImg: "images/Pignite.jpg",
 		Hp: pokemonHealth,
 		StatsString: pokemonStatString,
-		Attacks: pokeAttackList.options,
+		Attacks: pokeAttacks,
 		Weakness: pokemonWeakness,
 		Resistance: pokemonResistance,
 		FullDescription: pokemonFullDesc,
@@ -124,6 +129,6 @@ function getTypePicture(type) {
 updateCard();
 
 document.getElementById("pokeForm").addEventListener("click", function (e) {
-	e.preventDefault();
+	//e.preventDefault();
 	updateCard();
 });
