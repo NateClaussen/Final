@@ -12,6 +12,9 @@ function createNewElementTxt(name, attr, value, text) {
 class Pokemon {
 	constructor(attributes) {
 		Pokemon.#count++;
+		localStorage.setItem("PokeCount", Pokemon.#count);
+		// Pokemon.#count++;
+		console.log(Pokemon.#count);
 		this.Name = attributes.Name ?? "";
 		this.Stage = attributes.Stage ?? "Basic";
 		this.EvoImg = attributes.StageImg ?? null; //in the "" I can put a default image path...
@@ -31,7 +34,7 @@ class Pokemon {
 		this.Resistance = attributes.Resistance ?? 0;
 		this.FullDescription = attributes.FullDescription ?? "";
 	}
-	static #count = 0;
+	static #count = localStorage.getItem("PokeCount");
 
 	getCard() {
 		let pokeCard = createNewElement("div", "class", "pokeCard");

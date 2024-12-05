@@ -1,6 +1,8 @@
-let pokemonCard = new Pokemon();
+let pokemonCard = new Pokemon({});
 
-const pokeAttackList = document.getElementById("PokeAttackList");
+let currentEvoImgName = "";
+let currentMainImgName = "";
+
 const FpokemonName = document.getElementById("pokeName");
 const FpokemonStage = document.getElementById("pokeStage");
 const FpokemonStageImg = document.getElementById("pokeStageImgFile");
@@ -8,6 +10,7 @@ const FpokemonMainImg = document.getElementById("pokeMainImgFile");
 const FpokemonType = document.getElementById("pokeType");
 const FpokemonHealth = document.getElementById("hpNum");
 const FpokemonStatString = document.getElementById("PokeStatString");
+const pokeAttackList = document.getElementById("PokeAttackList");
 const FpokemonWeakness = document.getElementById("pokeWeakness");
 const FpokemonResistance = document.getElementById("pokeRes");
 const FpokemonFullDesc = document.getElementById("pokeFullDesc");
@@ -44,7 +47,8 @@ document.getElementById("RemoveBtn").addEventListener("click", function (e) {
 
 function updatePokemon() {
 	let pokemonName = FpokemonName.value;
-
+	let pokemonStage = FpokemonStage.value;
+	let pokemonStageImg;
 	let pokemonType = FpokemonType.value;
 	let pokemonHealth = FpokemonHealth.value;
 	let pokemonStatString = FpokemonStatString.value;
@@ -52,15 +56,71 @@ function updatePokemon() {
 	let pokemonResistance = FpokemonResistance.value;
 	let pokemonFullDesc = FpokemonFullDesc.value;
 
+	//#region PokeAttacks
 	//Get all of the attacks that the user has inputted
 	const pokeAttacks = [];
 	for (const option of pokeAttackList.options) {
 		pokeAttacks.push(JSON.parse(option.value));
 	}
+	//#endregion
+	//#region Evo and EvoImg
+	if (pokemonStage == "basic") {
+		FpokemonStageImg.disabled = true;
+		FpokemonStageImg.value = "";
+		currentEvoImgName = "";
+		pokemonCard.EvoImg = null;
+	} else {
+		FpokemonStageImg.disabled = false;
+		const evoImgFile = document.getElementById("pokeStageImgFile").files[0];
+		const evoReader = new FileReader();
+
+		evoReader.addEventListener(
+			"load",
+			() => {
+				if (currentEvoImgName != evoImgFile.name) {
+					pokemonCard.EvoImg = evoReader.result;
+					currentEvoImgName = evoImgFile.name;
+					updateCard();
+				}
+			},
+			false
+		);
+		if (evoImgFile) {
+			evoReader.readAsDataURL(evoImgFile);
+		} else {
+			pokemonCard.EvoImg = "images/Default-Stage.png";
+		}
+	}
+	//#endregion
+
+	//#region MainImage
+	const mainImgFile = document.getElementById("pokeMainImgFile").files[0];
+	const mainReader = new FileReader();
+
+	mainReader.addEventListener(
+		"load",
+		() => {
+			if (currentMainImgName != mainImgFile.name) {
+				pokemonCard.MainImg = mainReader.result;
+				currentMainImgName = mainImgFile.name;
+				updateCard();
+				console.log("Main Image Updated");
+				console.log(localStorage.getItem("PokeCount"), "From creator");
+			}
+		},
+		false
+	);
+	if (mainImgFile) {
+		mainReader.readAsDataURL(mainImgFile);
+	} else {
+		pokemonCard.MainImg = "images/default-image.jpg";
+	}
+	//#endregion
 
 	//Update all of the stats
 	pokemonCard.Name = pokemonName;
 	pokemonCard.Stage = pokemonStage;
+	//pokemonCard.EvoImg = pokemonStageImg;
 	pokemonCard.Type = pokemonType;
 	pokemonCard.TypeImg = getTypePicture(pokemonType);
 	pokemonCard.Hp = pokemonHealth;
@@ -73,14 +133,6 @@ function updatePokemon() {
 
 function updateCard() {
 	const outputDiv = document.getElementById("OutputDiv");
-
-	//let pokemonStage = FpokemonStage.value;
-
-	// if (pokemonStage == "basic") {
-	// 	FpokemonStageImg = null;
-	// } else {
-	// 	FpokemonStageImg = "images/Default-Stage.png";
-	// }
 
 	// if (pokemonMainImg.files[0]) {
 	// 	const reader = new FileReader();
@@ -109,12 +161,13 @@ document.getElementById("submitBtn").addEventListener("click", function (e) {
 	updateCard();
 });
 
-document.getElementById("pokeForm").addEventListener("onchange", function (e) {
+document.getElementById("pokeForm").addEventListener("change", function (e) {
 	//e.preventDefault();
 	updatePokemon();
 	updateCard();
 });
 
+updatePokemon();
 updateCard();
 
 function getTypePicture(type) {
