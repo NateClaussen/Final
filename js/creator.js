@@ -26,6 +26,8 @@ function addAttack() {
 		pokeAttackList.appendChild(option);
 		document.getElementById("AttackName").value = "";
 		document.getElementById("AttackDmg").value = "";
+		updatePokemon();
+		updateCard();
 	}
 }
 
@@ -33,6 +35,8 @@ function removeAttack() {
 	for (let i = 0; i < pokeAttackList.options.length; i++) {
 		if (pokeAttackList.options[i].selected) {
 			pokeAttackList.remove(i);
+			updatePokemon();
+			updateCard();
 		}
 	}
 }
@@ -50,7 +54,6 @@ document.getElementById("RemoveBtn").addEventListener("click", function (e) {
 function updatePokemon() {
 	let pokemonName = FpokemonName.value;
 	let pokemonStage = FpokemonStage.value;
-	let pokemonStageImg;
 	let pokemonType = FpokemonType.value;
 	let pokemonHealth = FpokemonHealth.value;
 	let pokemonStatString = FpokemonStatString.value;
@@ -160,7 +163,16 @@ function updateCard() {
 
 document.getElementById("submitBtn").addEventListener("click", function (e) {
 	e.preventDefault();
+	updatePokemon();
 	updateCard();
+
+	let pokeJson = JSON.stringify(pokemonCard);
+	localStorage.setItem("most-recent-card", pokeJson);
+
+	const a = document.createElement("a");
+	a.target = "_blank";
+	a.href = "newCard.html";
+	a.click();
 });
 
 document.getElementById("pokeForm").addEventListener("change", function (e) {

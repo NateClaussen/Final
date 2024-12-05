@@ -35,7 +35,7 @@ function addPignite() {
 	let pignite = new Pokemon({
 		Name: "Pignite",
 		Stage: "Stage 1",
-		StageImg: "images/Tepig.png",
+		EvoImg: "images/Tepig.png",
 		TypeImg: "images/types/FireTypeLogo.png",
 		MainImg: "images/Pignite.jpg",
 		Hp: 100,

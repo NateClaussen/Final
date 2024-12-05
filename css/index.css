@@ -1,0 +1,44 @@
+.carousel-inner {
+	height: 0;
+	padding-bottom: 35%;
+}
+
+.carousel-item {
+	position: absolute !important;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.carousel-item img {
+	height: 100%;
+	object-fit: fill;
+}
+
+.leftOne {
+	width: 49%;
+	height: 150px;
+	background-color: aquamarine;
+}
+
+.rightOne {
+	width: 49%;
+	height: 150px;
+	background-color: aquamarine;
+}
+
+/* #leftBox {
+	background-color: lightblue;
+	height: 150px;
+	padding-bottom: 35%;
+}
+
+#rightBox {
+	background-color: lightblue;
+	height: 150px;
+	padding-bottom: 35%;
+}
+
+#BottomDiv {
+	height: 150px;
+} */

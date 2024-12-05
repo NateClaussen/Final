@@ -17,7 +17,7 @@ class Pokemon {
 		console.log(Pokemon.#count);
 		this.Name = attributes.Name ?? "";
 		this.Stage = attributes.Stage ?? "Basic";
-		this.EvoImg = attributes.StageImg ?? null; //in the "" I can put a default image path...
+		this.EvoImg = attributes.EvoImg ?? null; //in the "" I can put a default image path...
 		this.TypeImg = attributes.TypeImg ?? "";
 		this.Type = attributes.Type ?? "normal";
 		this.Color = attributes.Color ?? "white";
