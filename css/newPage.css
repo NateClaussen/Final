@@ -1,0 +1,10 @@
+#PokemonJson {
+	width: 50%;
+	height: 150px;
+	overflow-wrap: break-word;
+	overflow: auto;
+}
+
+sub {
+	line-height: 12px;
+}
