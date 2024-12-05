@@ -24,6 +24,8 @@ function addAttack() {
 		option.value = JSON.stringify(attack);
 		option.textContent = `${attackName}: ${attackDmg}`;
 		pokeAttackList.appendChild(option);
+		document.getElementById("AttackName").value = "";
+		document.getElementById("AttackDmg").value = "";
 	}
 }
 
