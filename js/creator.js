@@ -1,4 +1,16 @@
+let pokemonCard = new Pokemon();
+
 const pokeAttackList = document.getElementById("PokeAttackList");
+const FpokemonName = document.getElementById("pokeName");
+const FpokemonStage = document.getElementById("pokeStage");
+const FpokemonStageImg = document.getElementById("pokeStageImgFile");
+const FpokemonMainImg = document.getElementById("pokeMainImgFile");
+const FpokemonType = document.getElementById("pokeType");
+const FpokemonHealth = document.getElementById("hpNum");
+const FpokemonStatString = document.getElementById("PokeStatString");
+const FpokemonWeakness = document.getElementById("pokeWeakness");
+const FpokemonResistance = document.getElementById("pokeRes");
+const FpokemonFullDesc = document.getElementById("pokeFullDesc");
 
 function addAttack() {
 	let attackName = document.getElementById("AttackName").value;
@@ -30,49 +42,63 @@ document.getElementById("RemoveBtn").addEventListener("click", function (e) {
 	removeAttack();
 });
 
-function updateCard() {
-	const outputDiv = document.getElementById("OutputDiv");
+function updatePokemon() {
+	let pokemonName = FpokemonName.value;
 
-	const pokemonName = document.getElementById("pokeName").value;
-	const pokemonStage = document.getElementById("pokeStage").value;
-	let pokemonStageImg = document.getElementById("pokeStageImgFile").value;
-	const pokemonMainImg = document.getElementById("pokeMainImgFile").value;
-	const pokemonType = document.getElementById("pokeType").value;
-	const pokemonHealth = document.getElementById("hpNum").value;
-	const pokemonStatString = document.getElementById("PokeStatString").value;
-	const pokemonWeakness = document.getElementById("pokeWeakness").value;
-	const pokemonResistance = document.getElementById("pokeRes").value;
-	const pokemonFullDesc = document.getElementById("pokeFullDesc").value;
+	let pokemonType = FpokemonType.value;
+	let pokemonHealth = FpokemonHealth.value;
+	let pokemonStatString = FpokemonStatString.value;
+	let pokemonWeakness = FpokemonWeakness.value;
+	let pokemonResistance = FpokemonResistance.value;
+	let pokemonFullDesc = FpokemonFullDesc.value;
 
-	if (pokemonStage == "basic") {
-		pokemonStageImg = null;
-	} else {
-		pokemonStageImg = "images/Tepig.png";
-	}
-
+	//Get all of the attacks that the user has inputted
 	const pokeAttacks = [];
 	for (const option of pokeAttackList.options) {
 		pokeAttacks.push(JSON.parse(option.value));
 	}
 
-	let newPokemon = new Pokemon({
-		Name: pokemonName,
-		Stage: pokemonStage,
-		StageImg: pokemonStageImg,
-		TypeImg: getTypePicture(pokemonType),
-		MainImg: "images/Pignite.jpg",
-		Hp: pokemonHealth,
-		StatsString: pokemonStatString,
-		Attacks: pokeAttacks,
-		Weakness: pokemonWeakness,
-		Resistance: pokemonResistance,
-		FullDescription: pokemonFullDesc,
-		Type: pokemonType,
-	});
+	//Update all of the stats
+	pokemonCard.Name = pokemonName;
+	pokemonCard.Stage = pokemonStage;
+	pokemonCard.Type = pokemonType;
+	pokemonCard.TypeImg = getTypePicture(pokemonType);
+	pokemonCard.Hp = pokemonHealth;
+	pokemonCard.StatsString = pokemonStatString;
+	pokemonCard.Attacks = pokeAttacks;
+	pokemonCard.Weakness = pokemonWeakness;
+	pokemonCard.Resistance = pokemonResistance;
+	pokemonCard.FullDescription = pokemonFullDesc;
+}
+
+function updateCard() {
+	const outputDiv = document.getElementById("OutputDiv");
+
+	//let pokemonStage = FpokemonStage.value;
+
+	// if (pokemonStage == "basic") {
+	// 	FpokemonStageImg = null;
+	// } else {
+	// 	FpokemonStageImg = "images/Default-Stage.png";
+	// }
+
+	// if (pokemonMainImg.files[0]) {
+	// 	const reader = new FileReader();
+	// 	const file = pokemonMainImg.files[0];
+
+	// 	reader.addEventListener("load", () => {
+	// 		FpokemonMainImg = reader.result;
+	// 		console.log(reader.result);
+	// 	});
+
+	// 	reader.readAsDataURL(file);
+	// } else {
+	// 	FpokemonMainImg = "images/default-image.jpg";
+	// }
 
 	//Append the card to the output
 	outputDiv.innerHTML = "";
-	outputDiv.appendChild(newPokemon.getCard());
+	outputDiv.appendChild(pokemonCard.getCard());
 	if (window.innerWidth >= 992) {
 		document.documentElement.scrollTop = 0;
 	}
@@ -82,6 +108,14 @@ document.getElementById("submitBtn").addEventListener("click", function (e) {
 	e.preventDefault();
 	updateCard();
 });
+
+document.getElementById("pokeForm").addEventListener("onchange", function (e) {
+	//e.preventDefault();
+	updatePokemon();
+	updateCard();
+});
+
+updateCard();
 
 function getTypePicture(type) {
 	switch (type) {
@@ -125,10 +159,3 @@ function getTypePicture(type) {
 			return "";
 	}
 }
-
-updateCard();
-
-document.getElementById("pokeForm").addEventListener("click", function (e) {
-	//e.preventDefault();
-	updateCard();
-});
