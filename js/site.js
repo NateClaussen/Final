@@ -1,4 +1,12 @@
+const savedPokedex = JSON.parse(localStorage.getItem("SavedPokedex"));
 let Pokedex = document.getElementById("pokedex");
+
+function addSavedPokedex() {
+	for (pokemon in savedPokedex) {
+		let nextP = new Pokemon(JSON.parse(savedPokedex[pokemon]));
+		Pokedex.appendChild(nextP.getCard());
+	}
+}
 
 function addPikachu() {
 	let pikachu = new Pokemon({
@@ -62,6 +70,7 @@ function addPignite() {
 
 addPikachu();
 addPignite();
+addSavedPokedex();
 
 // let mockDatabase = [
 //     {

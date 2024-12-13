@@ -125,7 +125,6 @@ function updatePokemon() {
 	//Update all of the stats
 	pokemonCard.Name = pokemonName;
 	pokemonCard.Stage = pokemonStage;
-	//pokemonCard.EvoImg = pokemonStageImg;
 	pokemonCard.Type = pokemonType;
 	pokemonCard.TypeImg = getTypePicture(pokemonType);
 	pokemonCard.Hp = pokemonHealth;
@@ -139,26 +138,13 @@ function updatePokemon() {
 function updateCard() {
 	const outputDiv = document.getElementById("OutputDiv");
 
-	// if (pokemonMainImg.files[0]) {
-	// 	const reader = new FileReader();
-	// 	const file = pokemonMainImg.files[0];
-
-	// 	reader.addEventListener("load", () => {
-	// 		FpokemonMainImg = reader.result;
-	// 		console.log(reader.result);
-	// 	});
-
-	// 	reader.readAsDataURL(file);
-	// } else {
-	// 	FpokemonMainImg = "images/default-image.jpg";
-	// }
-
 	//Append the card to the output
 	outputDiv.innerHTML = "";
 	outputDiv.appendChild(pokemonCard.getCard());
-	if (window.innerWidth >= 992) {
-		document.documentElement.scrollTop = 0;
-	}
+	//If you want to make it scroll to the top. I have found this is kind of annoying...
+	// if (window.innerWidth >= 992) {
+	// 	document.documentElement.scrollTop = 0;
+	// }
 }
 
 document.getElementById("submitBtn").addEventListener("click", function (e) {
@@ -168,6 +154,16 @@ document.getElementById("submitBtn").addEventListener("click", function (e) {
 
 	let pokeJson = JSON.stringify(pokemonCard);
 	localStorage.setItem("most-recent-card", pokeJson);
+	//localStorage.removeItem("SavedPokedex");
+	const savedPokedex = JSON.parse(localStorage.getItem("SavedPokedex"));
+	if (savedPokedex) {
+		savedPokedex.push(pokeJson);
+		localStorage.setItem("SavedPokedex", JSON.stringify(savedPokedex));
+	} else {
+		let newPokedex = [];
+		newPokedex.push(pokeJson);
+		localStorage.setItem("SavedPokedex", JSON.stringify(newPokedex));
+	}
 
 	const a = document.createElement("a");
 	a.target = "_blank";
@@ -176,7 +172,6 @@ document.getElementById("submitBtn").addEventListener("click", function (e) {
 });
 
 document.getElementById("pokeForm").addEventListener("change", function (e) {
-	//e.preventDefault();
 	updatePokemon();
 	updateCard();
 });
